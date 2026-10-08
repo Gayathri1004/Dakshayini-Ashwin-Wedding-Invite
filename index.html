@@ -187,29 +187,24 @@ a{color:inherit;}
   display:grid;place-items:center;z-index:4;
   transition:opacity .35s ease .15s, transform .5s ease;
 }
-.env-seal::before{            /* outer hairline ring */
+.env-seal::before{            /* single hairline ring */
   content:"";position:absolute;inset:3px;border-radius:50%;
-  border:1px solid rgba(240,223,174,.6);
+  border:1px solid rgba(240,223,174,.5);
 }
-.env-seal::after{             /* inner ring, kolam-style */
-  content:"";position:absolute;inset:6px;border-radius:50%;
-  border:1px dotted rgba(240,223,174,.45);
-}
+/* D & A — upright gold serif caps with an ornate italic ampersand */
 .mono{
-  position:relative;z-index:1;display:flex;align-items:center;
+  position:relative;z-index:1;display:flex;align-items:baseline;justify-content:center;
   color:var(--gold-pale);line-height:1;
-  text-shadow:0 1px 2px rgba(0,0,0,.45);
+  text-shadow:0 1px 2px rgba(0,0,0,.4);
 }
 .mono i{
-  font-family:var(--f-script);font-style:normal;
-  font-size:clamp(1.15rem,2.9vw,1.6rem);line-height:1;
+  font-family:var(--f-caps);font-style:normal;font-weight:400;
+  font-size:clamp(.95rem,2.4vw,1.28rem);line-height:1;letter-spacing:0;
 }
-.mono i:first-child{margin-right:-.14em;}   /* let the D and A interlace */
-.mono i:last-child{margin-left:-.1em;}
 .mono b{
   font-family:var(--f-body);font-weight:400;font-style:italic;
-  font-size:clamp(.5rem,1.3vw,.66rem);opacity:.8;
-  margin:0 .04em;align-self:flex-end;padding-bottom:.18em;
+  font-size:clamp(.82rem,2.1vw,1.1rem);line-height:1;
+  margin:0 .2em;opacity:.95;
 }
 #cover.opening .env-flap{transform:rotateX(178deg);}
 #cover.opening .env-seal{opacity:0;transform:translate(-50%,-50%) scale(.6);}
@@ -321,12 +316,6 @@ a{color:inherit;}
 }
 .dark .k-en{color:var(--gold-pale);}
 .k-ta{font-size:clamp(.76rem,2.9vw,.9rem);margin:8px auto 0;line-height:1.7;max-width:28ch;text-wrap:balance;}
-
-/* every centred paragraph gets a comfortable measure so lines break evenly */
-.hero-eyebrow,.hero-names-ta,.event-note,.venue-addr,.cd-msg,.cd-msg-ta,
-.parent-block .names,.parent-block .names-ta,footer .f-ta{
-  max-width:34ch;margin-left:auto;margin-right:auto;text-wrap:pretty;
-}
 
 .divider{display:flex;align-items:center;justify-content:center;gap:9px;margin:16px auto 22px;max-width:200px;}
 .divider span{height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(179,135,40,.75),transparent);}
@@ -441,6 +430,20 @@ footer .f-sig{font-family:var(--f-script);font-size:1.8rem;color:var(--gold);mar
 
 #yt-holder{position:fixed;width:1px;height:1px;left:-9999px;top:0;opacity:.01;pointer-events:none;}
 .petal{position:fixed;top:-8vh;z-index:5;pointer-events:none;opacity:0;}
+
+/* ============================================================
+   CENTRING  —  must stay last so no component `margin:` shorthand
+   can reset these auto side-margins back to zero
+   ============================================================ */
+.hero-eyebrow,.hero-names-ta,.event-note,.venue-addr,.cd-msg,.cd-msg-ta,
+.parent-block .names,.parent-block .names-ta,.venue-ta,.btn-ta,
+footer .f-ta,footer .f-en,.k-en,.k-ta{
+  margin-left:auto;margin-right:auto;
+}
+.hero-eyebrow,.hero-names-ta,.event-note,.venue-addr,.cd-msg,
+.parent-block .names,.parent-block .names-ta,footer .f-ta{
+  max-width:34ch;text-wrap:pretty;
+}
 
 /* ============================================================
    PHONES  —  tighter rhythm, no cramped type
@@ -641,27 +644,6 @@ footer .f-sig{font-family:var(--f-script);font-size:1.8rem;color:var(--gold);mar
 
   <div class="wrap">
 
-    <!-- COUNTDOWN -->
-    <section class="card dark" aria-labelledby="cd-h">
-      <svg class="corner tl" viewBox="0 0 40 40" fill="none" stroke="#e3c472" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#e3c472" stroke="none"/></svg>
-      <svg class="corner tr" viewBox="0 0 40 40" fill="none" stroke="#e3c472" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#e3c472" stroke="none"/></svg>
-      <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="#e3c472" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#e3c472" stroke="none"/></svg>
-      <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="#e3c472" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#e3c472" stroke="none"/></svg>
-
-      <h2 class="k-en" id="cd-h">Counting Down to the Celebration</h2>
-      <p class="k-ta ta">திருமண நாள் வரை</p>
-      <div class="divider"><span></span><i>&#10070;</i><span></span></div>
-
-      <div class="cd-grid" id="cd">
-        <div class="cd-cell"><div class="cd-num" id="cd-d">00</div><span class="cd-lab"><b>Days</b><em>நாட்கள்</em></span></div>
-        <div class="cd-cell"><div class="cd-num" id="cd-h2">00</div><span class="cd-lab"><b>Hours</b><em>மணி</em></span></div>
-        <div class="cd-cell"><div class="cd-num" id="cd-m">00</div><span class="cd-lab"><b>Minutes</b><em>நிமிடம்</em></span></div>
-        <div class="cd-cell"><div class="cd-num" id="cd-s">00</div><span class="cd-lab"><b>Seconds</b><em>வினாடி</em></span></div>
-      </div>
-      <p class="cd-msg" id="cd-msg">until the celebrations begin</p>
-      <p class="cd-msg-ta ta" id="cd-msg-ta">கொண்டாட்டம் தொடங்க</p>
-    </section>
-
     <!-- BLESSINGS / PARENTS -->
     <section class="card" aria-labelledby="bl-h">
       <svg class="corner tl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
@@ -779,6 +761,27 @@ footer .f-sig{font-family:var(--f-script);font-size:1.8rem;color:var(--gold);mar
         Get Directions
       </a>
       <p class="btn-ta ta">வழி காட்டி</p>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="card dark" aria-labelledby="cd-h">
+      <svg class="corner tl" viewBox="0 0 40 40" fill="none" stroke="#e3c472" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#e3c472" stroke="none"/></svg>
+      <svg class="corner tr" viewBox="0 0 40 40" fill="none" stroke="#e3c472" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#e3c472" stroke="none"/></svg>
+      <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="#e3c472" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#e3c472" stroke="none"/></svg>
+      <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="#e3c472" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#e3c472" stroke="none"/></svg>
+
+      <h2 class="k-en" id="cd-h">Counting Down to the Celebration</h2>
+      <p class="k-ta ta">திருமண நாள் வரை</p>
+      <div class="divider"><span></span><i>&#10070;</i><span></span></div>
+
+      <div class="cd-grid" id="cd">
+        <div class="cd-cell"><div class="cd-num" id="cd-d">00</div><span class="cd-lab"><b>Days</b><em>நாட்கள்</em></span></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-h2">00</div><span class="cd-lab"><b>Hours</b><em>மணி</em></span></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-m">00</div><span class="cd-lab"><b>Minutes</b><em>நிமிடம்</em></span></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-s">00</div><span class="cd-lab"><b>Seconds</b><em>வினாடி</em></span></div>
+      </div>
+      <p class="cd-msg" id="cd-msg">until the celebrations begin</p>
+      <p class="cd-msg-ta ta" id="cd-msg-ta">கொண்டாட்டம் தொடங்க</p>
     </section>
 
   </div>
