@@ -23,18 +23,18 @@
   --maroon:#6b0f1a;
   --maroon-deep:#4a0a12;
   --maroon-soft:#8c1c2b;
-  --gold:#b38728;
-  --gold-light:#e3c472;
-  --gold-pale:#f0dfae;
+  --gold:#b8891f;
+  --gold-light:#ebcd7d;
+  --gold-pale:#f6e7bd;
   --cream:#fdf7ec;
   --cream-2:#f7ecd9;
-  --ink:#3a2418;
-  --ink-soft:#6a5244;
-  --ta-faint:rgba(106,82,68,.60);        /* Tamil on light cards */
-  --ta-faint-dark:rgba(240,223,174,.52); /* Tamil on maroon cards */
+  --ink:#2c1a0f;                         /* body text — deeper, so it reads crisply */
+  --ink-soft:#4f3a2c;                    /* secondary English text */
+  --ta-faint:rgba(79,58,44,.72);         /* Tamil on light cards — lighter than --ink-soft */
+  --ta-faint-dark:rgba(246,231,189,.66); /* Tamil on maroon cards — lighter than the cream */
 
   --gold-foil:linear-gradient(135deg,#8a6318 0%,#b38728 18%,#f6e7a8 38%,#c8a140 52%,#8a6318 70%,#dcc277 88%,#9c7420 100%);
-  --gold-solid:#ab7c1c;   /* flat gold used for the names on the invitation page */
+  --gold-solid:#b8821a;   /* flat gold used for the names on the invitation page */
 
   --f-display:'Marcellus',Georgia,serif;
   --f-body:'Cormorant Garamond',Georgia,serif;
@@ -126,7 +126,7 @@ a{color:inherit;}
 }
 .cover-title-ta{
   font-family:var(--f-tamil);font-size:clamp(.7rem,2.6vw,.86rem);
-  color:rgba(240,223,174,.5);letter-spacing:.08em;margin:0;
+  color:var(--ta-faint-dark);letter-spacing:.08em;margin:0;
 }
 .cover-names{
   font-family:var(--f-script);
@@ -142,7 +142,7 @@ a{color:inherit;}
   display:block;font-family:var(--f-body);font-style:italic;
   font-size:clamp(.95rem,3.4vw,1.25rem);color:var(--gold-light);
   -webkit-text-fill-color:var(--gold-light);
-  margin:2px 0;letter-spacing:.2em;opacity:.85;
+  margin:2px 0;letter-spacing:.2em;
 }
 .cover-date{
   font-family:var(--f-caps);font-weight:400;letter-spacing:.26em;
@@ -225,7 +225,7 @@ a{color:inherit;}
 .tap svg{width:15px;height:15px;flex:none;}
 .cover-note-ta{
   font-family:var(--f-tamil);font-size:clamp(.72rem,2.6vw,.84rem);
-  color:rgba(240,223,174,.55);margin:0;letter-spacing:.04em;line-height:1.7;
+  color:var(--ta-faint-dark);margin:0;letter-spacing:.04em;line-height:1.7;
   max-width:26ch;
 }
 
@@ -238,8 +238,18 @@ a{color:inherit;}
 .wrap{width:min(720px,90vw);margin:0 auto;}
 
 /* ---- hero ---- */
-.hero{position:relative;padding:clamp(44px,10vw,88px) 0 clamp(20px,4.5vw,40px);text-align:center;}
+.hero{position:relative;padding:clamp(40px,9vw,82px) 0 clamp(18px,4vw,36px);text-align:center;}
 .om{font-family:var(--f-tamil);font-size:clamp(1.4rem,5.4vw,2.1rem);color:var(--gold);line-height:1;margin:0 0 12px;}
+
+/* D & A wordmark — plain gold letters on the page, no disc behind them */
+.hero-mark{
+  display:flex;align-items:center;justify-content:center;gap:clamp(12px,3vw,18px);
+  width:min(300px,72%);margin:clamp(20px,4.5vw,30px) auto 0;
+}
+.hero-mark .line{height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(179,135,40,.8),transparent);}
+.hero-mark .mono{color:var(--gold-solid);text-shadow:none;}
+.hero-mark .mono i{font-size:clamp(1.1rem,3.5vw,1.5rem);}
+.hero-mark .mono b{font-size:clamp(.95rem,3vw,1.24rem);}
 .hero-title{
   font-family:var(--f-caps);font-weight:400;letter-spacing:.34em;text-transform:uppercase;
   font-size:clamp(.62rem,2.5vw,.82rem);color:var(--maroon);
@@ -264,15 +274,6 @@ a{color:inherit;}
   font-size:clamp(.95rem,3.6vw,1.35rem);color:var(--maroon-soft);
   margin:4px 0;line-height:1.2;
 }
-.hero-names-ta{font-size:clamp(.82rem,3.2vw,1rem);margin-top:12px;line-height:1.85;}
-.hero-date{
-  margin-top:22px;display:inline-flex;flex-direction:column;align-items:center;gap:5px;
-  padding:13px clamp(18px,5vw,32px);
-  border-top:1px solid rgba(179,135,40,.45);border-bottom:1px solid rgba(179,135,40,.45);
-}
-.hero-date b{font-family:var(--f-caps);font-weight:500;letter-spacing:.14em;font-size:clamp(.74rem,2.9vw,.94rem);color:var(--maroon);}
-.hero-date small{font-family:var(--f-display);font-size:clamp(.88rem,3.2vw,.96rem);color:var(--ink-soft);letter-spacing:.03em;}
-.hero-date .ta{font-size:.78rem;}
 
 /* ---- cards ---- */
 .card{
@@ -336,10 +337,10 @@ a{color:inherit;}
 .cd-lab b{
   display:block;margin-top:9px;font-family:var(--f-caps);font-weight:400;
   font-size:clamp(.55rem,2.1vw,.66rem);letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(253,247,236,.9);
+  color:var(--cream);
 }
 .cd-lab em{display:block;font-family:var(--f-tamil);font-style:normal;font-size:clamp(.55rem,2.1vw,.66rem);color:var(--ta-faint-dark);margin-top:3px;}
-.cd-msg{margin:20px 0 0;font-family:var(--f-body);font-style:italic;font-size:1.02rem;color:rgba(253,247,236,.8);}
+.cd-msg{margin:20px 0 0;font-family:var(--f-body);font-style:italic;font-size:1.02rem;color:rgba(253,247,236,.95);}
 .cd-msg-ta{font-size:.8rem;margin-top:5px;}
 
 /* ---- blessings ---- */
@@ -357,8 +358,8 @@ a{color:inherit;}
 }
 .parent-block .names-ta{font-size:.78rem;margin-top:6px;line-height:1.7;}
 .ph{background:rgba(179,135,40,.14);border-bottom:1px dashed rgba(179,135,40,.7);padding:0 5px;border-radius:3px;}
-.knot{display:grid;place-items:center;padding-top:4px;}
-.knot svg{width:42px;height:42px;opacity:.75;}
+.knot{display:grid;place-items:center;padding-top:6px;}
+.knot svg{width:clamp(40px,9vw,52px);height:auto;}
 
 /* ---- events ---- */
 .events{display:block;}
@@ -401,7 +402,9 @@ a{color:inherit;}
 footer{text-align:center;padding:36px 20px calc(104px + env(safe-area-inset-bottom));}
 footer .f-en{font-family:var(--f-caps);font-weight:400;font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--maroon);margin:0;padding-left:.26em;line-height:1.9;text-wrap:balance;}
 footer .f-ta{font-size:.84rem;margin:10px 0 0;line-height:1.8;}
-footer .f-sig{font-family:var(--f-script);font-size:1.8rem;color:var(--gold);margin:14px 0 0;padding:0 .2em;line-height:1.4;}
+.footer-mark{margin-top:clamp(16px,3.5vw,22px);width:min(260px,70%);}
+.footer-mark .mono i{font-size:clamp(1.15rem,3.6vw,1.55rem);}
+.footer-mark .mono b{font-size:clamp(1rem,3vw,1.3rem);}
 
 /* ---- music button ---- */
 #music{
@@ -462,11 +465,11 @@ footer .f-ta,footer .f-en,.k-en,.k-ta{
   .k-ta{max-width:24ch;}
   .divider{margin:14px auto 20px;max-width:150px;}
 
-  .hero{padding-top:38px;}
+  .hero{padding-top:34px;}
   .om{font-size:1.35rem;margin-bottom:10px;}
+  .hero-mark{width:min(240px,78%);margin-top:18px;}
   .hero-eyebrow{font-size:.95rem;margin:14px auto 4px;max-width:26ch;}
-  .hero-date{margin-top:18px;padding:12px 20px;}
-  .hero-names-ta{max-width:28ch;}
+  .knot svg{width:46px;}
 
   .event-note,.cd-msg{font-size:.98rem;max-width:30ch;}
   .event-rows{gap:10px;}
@@ -632,12 +635,10 @@ footer .f-ta,footer .f-en,.k-en,.k-ta{
         Ashwin Sureshkumar
       </h1>
 
-      <p class="hero-names-ta ta">தாக்‌ஷாயினி சுரேஷ் &nbsp;&#8226;&nbsp; அஷ்வின் சுரேஷ்குமார்</p>
-
-      <div class="hero-date">
-        <b>15 &amp; 16 November 2026</b>
-        <small>Suguna Auditorium, Coimbatore</small>
-        <span class="ta">சுகுணா அரங்கம், கோயம்புத்தூர்</span>
+      <div class="hero-mark" aria-hidden="true">
+        <span class="line"></span>
+        <span class="mono"><i>D</i><b>&amp;</b><i>A</i></span>
+        <span class="line"></span>
       </div>
     </div>
   </header>
@@ -651,8 +652,7 @@ footer .f-ta,footer .f-en,.k-en,.k-ta{
       <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
       <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
 
-      <h2 class="k-en" id="bl-h">With the Grace of God & Divine Blessings</h2>
-      <p class="k-ta ta">பெரியோர்களின் ஆசியுடன்</p>
+      <h2 class="k-en" id="bl-h">With Grace of God and Divine Blessings</h2>
       <div class="divider"><span></span><i>&#10070;</i><span></span></div>
 
       <div class="parents">
@@ -664,12 +664,30 @@ footer .f-ta,footer .f-en,.k-en,.k-ta{
           <p class="names-ta ta">திரு. சுரேஷ் தாமோதரன் &amp;<br>திருமதி. வித்யாப்ரியா சுரேஷ் அவர்களின் மகள்</p>
         </div>
 
+        <!-- wedding ring -->
         <div class="knot" aria-hidden="true">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#b38728" stroke-width="1.3">
-            <path d="M24 10c-7 0-12 5-12 11s5 11 12 11 12-5 12-11-5-11-12-11z" opacity=".35"/>
-            <path d="M14 24c4-6 16-6 20 0-4 6-16 6-20 0z"/>
-            <circle cx="24" cy="24" r="3.2" fill="#b38728" stroke="none"/>
-            <path d="M24 34v6M20 40h8"/>
+          <svg viewBox="0 0 56 60">
+            <!-- band -->
+            <circle cx="28" cy="40" r="14" fill="none" stroke="#b38728" stroke-width="1.8"/>
+            <circle cx="28" cy="40" r="10.4" fill="none" stroke="#b38728" stroke-width=".9" opacity=".45"/>
+            <!-- solitaire -->
+            <path d="M28 9l6.8 7.6L28 27l-6.8-10.4L28 9z" fill="#f2c572" fill-opacity=".45"
+                  stroke="#b38728" stroke-width="1.5" stroke-linejoin="round"/>
+            <g fill="none" stroke="#b38728" stroke-width=".9" opacity=".7">
+              <path d="M21.2 16.6h13.6"/>
+              <path d="M24.6 16.6L28 9l3.4 7.6"/>
+              <path d="M24.6 16.6L28 27l3.4-10.4"/>
+            </g>
+            <!-- claws -->
+            <g stroke="#b38728" stroke-width="1.3" stroke-linecap="round">
+              <path d="M22.6 19.4l-1.8 5"/>
+              <path d="M33.4 19.4l1.8 5"/>
+            </g>
+            <!-- sparkle -->
+            <g fill="#b38728" opacity=".75">
+              <path d="M44 12l.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9L44 12z"/>
+              <path d="M10.5 20l.6 1.8 1.8.6-1.8.6-.6 1.8-.6-1.8-1.8-.6 1.8-.6.6-1.8z"/>
+            </g>
           </svg>
         </div>
 
@@ -789,7 +807,12 @@ footer .f-ta,footer .f-en,.k-en,.k-ta{
   <footer>
     <p class="f-en">We joyfully await your presence</p>
     <p class="f-ta ta">தங்கள் வருகை தந்து சிறப்பிக்குமாறு அன்புடன் அழைக்கிறோம்</p>
-    <p class="f-sig">Dakshayini &amp; Ashwin</p>
+
+    <div class="hero-mark footer-mark" aria-hidden="true">
+      <span class="line"></span>
+      <span class="mono"><i>D</i><b>&amp;</b><i>A</i></span>
+      <span class="line"></span>
+    </div>
   </footer>
 </main>
 
