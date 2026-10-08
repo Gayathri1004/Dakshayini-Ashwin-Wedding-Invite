@@ -7,14 +7,13 @@
 <meta name="description" content="Wedding invitation of Dakshayini Suresh and Ashwin Sureshkumar. 15 &amp; 16 November, Suguna Auditorium, Coimbatore." />
 <meta name="theme-color" content="#6b0f1a" />
 
-<!-- Open Graph (for WhatsApp / social previews) -->
 <meta property="og:title" content="Dakshayini &amp; Ashwin — Wedding Invitation" />
 <meta property="og:description" content="15 & 16 November · Suguna Auditorium, Coimbatore" />
 <meta property="og:type" content="website" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Marcellus&family=Great+Vibes&family=Hind+Madurai:wght@300;400;500;600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Marcellus&family=Great+Vibes&family=Hind+Madurai:wght@300;400;500;600&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
@@ -31,8 +30,11 @@
   --cream-2:#f7ecd9;
   --ink:#3a2418;
   --ink-soft:#6a5244;
+  --ta-faint:rgba(106,82,68,.60);        /* Tamil on light cards */
+  --ta-faint-dark:rgba(240,223,174,.52); /* Tamil on maroon cards */
 
   --gold-foil:linear-gradient(135deg,#8a6318 0%,#b38728 18%,#f6e7a8 38%,#c8a140 52%,#8a6318 70%,#dcc277 88%,#9c7420 100%);
+  --gold-solid:#ab7c1c;   /* flat gold used for the names on the invitation page */
 
   --f-display:'Marcellus',Georgia,serif;
   --f-body:'Cormorant Garamond',Georgia,serif;
@@ -57,11 +59,29 @@ body{
     radial-gradient(circle at 50% 100%, rgba(179,135,40,.10), transparent 55%),
     radial-gradient(rgba(179,135,40,.16) 1px, transparent 1.2px);
   background-size:auto,auto,auto,26px 26px;
+  background-attachment:fixed,fixed,fixed,scroll;
   overflow-x:hidden;
 }
 body.locked{overflow:hidden;height:100%;}
 img{max-width:100%;display:block;}
 a{color:inherit;}
+
+/* shared Tamil treatment: always UNDER the English, always fainter */
+.ta{
+  font-family:var(--f-tamil);font-weight:400;
+  color:var(--ta-faint);letter-spacing:.01em;
+}
+.dark .ta{color:var(--ta-faint-dark);}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0;z-index:140;
+  background:var(--gold-solid);box-shadow:0 0 10px rgba(179,135,40,.6);
+  transition:width .12s linear;opacity:0;
+}
+#progress.on{opacity:1;}
 
 /* ============================================================
    COVER  /  "TAP TO OPEN"
@@ -69,11 +89,10 @@ a{color:inherit;}
 #cover{
   position:fixed;inset:0;z-index:120;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:clamp(14px,3vw,26px);
+  gap:clamp(12px,2.6vw,20px);
   padding:28px 20px calc(28px + env(safe-area-inset-bottom));
   text-align:center;
-  background:
-    radial-gradient(ellipse at 50% 18%, #8c1c2b 0%, #6b0f1a 42%, #4a0a12 100%);
+  background:radial-gradient(ellipse at 50% 18%, #8c1c2b 0%, #6b0f1a 42%, #4a0a12 100%);
   cursor:pointer;
   transition:opacity .9s ease, transform .9s cubic-bezier(.65,0,.35,1), visibility .9s;
   -webkit-tap-highlight-color:transparent;
@@ -90,52 +109,52 @@ a{color:inherit;}
 
 .toran{position:absolute;top:0;left:0;width:100%;pointer-events:none;opacity:.95;}
 
-.cover-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2.4vw,18px);}
+.cover-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:clamp(8px,2vw,14px);}
 
-.cover-kolam{width:clamp(74px,16vw,104px);opacity:.9;animation:spin 48s linear infinite;}
+.cover-kolam{width:clamp(70px,14vw,96px);opacity:.9;animation:spin 48s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-.cover-tamil{
-  font-family:var(--f-tamil);font-weight:400;
-  font-size:clamp(.82rem,3.1vw,1.05rem);
-  letter-spacing:.14em;color:var(--gold-pale);
+.cover-title{
+  font-family:var(--f-caps);font-weight:600;
+  font-size:clamp(.68rem,2.6vw,.84rem);
+  letter-spacing:.42em;text-transform:uppercase;color:var(--gold-pale);
+  margin-left:.42em;
 }
-.cover-eyebrow{
-  font-family:var(--f-caps);font-size:clamp(.6rem,2.4vw,.74rem);
-  letter-spacing:.44em;text-transform:uppercase;color:rgba(240,223,174,.72);
-  margin-left:.44em;
+.cover-title-ta{
+  font-family:var(--f-tamil);font-size:clamp(.74rem,2.8vw,.9rem);
+  color:rgba(240,223,174,.5);letter-spacing:.1em;margin-top:-2px;
 }
 .cover-names{
   font-family:var(--f-script);
-  font-size:clamp(2.6rem,11vw,5rem);
-  line-height:1.05;
+  font-size:clamp(2.3rem,9vw,4.3rem);
+  line-height:1.32;                 /* room for the tall D / long S swashes */
+  margin:0;
+  padding:.1em .22em;               /* stops the first & last glyph clipping */
+  overflow:visible;
   background:var(--gold-foil);-webkit-background-clip:text;background-clip:text;color:transparent;
   filter:drop-shadow(0 3px 10px rgba(0,0,0,.35));
 }
 .cover-amp{
   display:block;font-family:var(--f-body);font-style:italic;
-  font-size:clamp(1rem,4vw,1.4rem);color:var(--gold-light);
+  font-size:clamp(1rem,3.6vw,1.3rem);color:var(--gold-light);
+  -webkit-text-fill-color:var(--gold-light);
   margin:2px 0;letter-spacing:.2em;opacity:.85;
 }
 .cover-date{
-  font-family:var(--f-caps);letter-spacing:.3em;font-size:clamp(.66rem,2.7vw,.82rem);
-  color:var(--gold-pale);text-transform:uppercase;
+  font-family:var(--f-caps);font-weight:500;letter-spacing:.3em;
+  font-size:clamp(.64rem,2.5vw,.78rem);color:var(--gold-pale);text-transform:uppercase;
 }
 .rule{display:flex;align-items:center;justify-content:center;gap:10px;width:min(300px,76vw);}
 .rule span{height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold-light),transparent);}
 .rule i{color:var(--gold-light);font-style:normal;font-size:.8rem;}
 
 /* envelope */
-.env{
-  position:relative;width:clamp(152px,42vw,210px);aspect-ratio:3/2;margin-top:6px;
-  perspective:900px;
-}
+.env{position:relative;width:clamp(146px,34vw,192px);aspect-ratio:3/2;margin-top:4px;perspective:900px;}
 .env-body{
   position:absolute;inset:0;border-radius:8px;
   background:linear-gradient(160deg,#fdf7ec,#eddcbf);
   box-shadow:0 20px 40px -18px rgba(0,0,0,.6);
-  border:1px solid rgba(179,135,40,.55);
-  overflow:hidden;
+  border:1px solid rgba(179,135,40,.55);overflow:hidden;
 }
 .env-body::after{
   content:"";position:absolute;inset:0;
@@ -149,16 +168,15 @@ a{color:inherit;}
   clip-path:polygon(0 0,100% 0,50% 100%);
   transform-origin:top center;transform:rotateX(0deg);
   transition:transform .75s cubic-bezier(.6,-0.25,.3,1.3);
-  border-top:1px solid rgba(179,135,40,.6);
-  z-index:3;
+  border-top:1px solid rgba(179,135,40,.6);z-index:3;
 }
 .env-seal{
   position:absolute;top:52%;left:50%;transform:translate(-50%,-50%);
-  width:clamp(34px,9vw,46px);height:clamp(34px,9vw,46px);border-radius:50%;
+  width:clamp(32px,8vw,42px);height:clamp(32px,8vw,42px);border-radius:50%;
   background:radial-gradient(circle at 34% 30%,#a8202f,#6b0f1a 68%,#4a0a12);
   box-shadow:0 6px 14px rgba(0,0,0,.45), inset 0 0 0 2px rgba(240,223,174,.5);
   display:grid;place-items:center;z-index:4;
-  font-family:var(--f-caps);color:var(--gold-pale);font-size:clamp(.62rem,2.2vw,.76rem);letter-spacing:.06em;
+  font-family:var(--f-caps);color:var(--gold-pale);font-size:clamp(.6rem,2vw,.72rem);
   transition:opacity .35s ease .15s, transform .5s ease;
 }
 #cover.opening .env-flap{transform:rotateX(178deg);}
@@ -166,12 +184,10 @@ a{color:inherit;}
 
 .tap{
   position:relative;z-index:2;display:inline-flex;align-items:center;gap:10px;
-  margin-top:clamp(8px,2.5vw,16px);
-  padding:13px 26px;border-radius:999px;
-  border:1px solid rgba(240,223,174,.55);
-  background:rgba(253,247,236,.07);
+  margin-top:clamp(6px,2vw,14px);padding:13px 26px;border-radius:999px;
+  border:1px solid rgba(240,223,174,.55);background:rgba(253,247,236,.07);
   backdrop-filter:blur(2px);
-  font-family:var(--f-caps);font-size:clamp(.66rem,2.7vw,.8rem);
+  font-family:var(--f-caps);font-weight:600;font-size:clamp(.64rem,2.5vw,.76rem);
   letter-spacing:.24em;text-transform:uppercase;color:var(--gold-pale);
   animation:breathe 2.4s ease-in-out infinite;
 }
@@ -179,11 +195,9 @@ a{color:inherit;}
   0%,100%{transform:translateY(0);box-shadow:0 0 0 0 rgba(240,223,174,.26);}
   50%{transform:translateY(-4px);box-shadow:0 0 0 14px rgba(240,223,174,0);}
 }
-.tap svg{width:15px;height:15px;fill:currentColor;}
-.cover-note{
-  font-family:var(--f-body);font-style:italic;font-size:.8rem;
-  color:rgba(240,223,174,.52);letter-spacing:.04em;
-}
+.tap svg{width:15px;height:15px;}
+.cover-note{font-family:var(--f-body);font-style:italic;font-size:.84rem;color:rgba(240,223,174,.6);}
+.cover-note-ta{font-family:var(--f-tamil);font-size:.74rem;color:rgba(240,223,174,.38);margin-top:-6px;}
 
 /* ============================================================
    MAIN
@@ -194,46 +208,41 @@ a{color:inherit;}
 .wrap{width:min(720px,92vw);margin:0 auto;}
 
 /* ---- hero ---- */
-.hero{
-  position:relative;padding:clamp(58px,13vw,96px) 0 clamp(26px,6vw,44px);
-  text-align:center;overflow:hidden;
-}
-.hero-kolam{
-  position:absolute;top:-70px;left:50%;transform:translateX(-50%);
-  width:min(620px,150vw);opacity:.17;pointer-events:none;
-}
+.hero{position:relative;padding:clamp(58px,13vw,96px) 0 clamp(26px,6vw,44px);text-align:center;overflow:visible;}
+.hero-kolam{position:absolute;top:-70px;left:50%;transform:translateX(-50%);width:min(620px,150vw);opacity:.17;pointer-events:none;}
 .hero>*{position:relative;z-index:1;}
-.om{
-  font-family:var(--f-tamil);font-size:clamp(1.5rem,6vw,2rem);color:var(--gold);
-  line-height:1;margin-bottom:6px;
+.om{font-family:var(--f-tamil);font-size:clamp(1.5rem,6vw,2.1rem);color:var(--gold);line-height:1;margin:0 0 14px;}
+.hero-title{
+  font-family:var(--f-caps);font-weight:600;letter-spacing:.42em;text-transform:uppercase;
+  font-size:clamp(.66rem,2.7vw,.84rem);color:var(--maroon);margin:0;margin-left:.42em;
 }
-.hero-tamil-title{
-  font-family:var(--f-tamil);font-weight:500;letter-spacing:.2em;
-  font-size:clamp(.84rem,3.4vw,1.02rem);color:var(--maroon-soft);
-}
+.hero-title-ta{font-size:clamp(.78rem,3vw,.92rem);margin:7px 0 0;letter-spacing:.08em;}
 .hero-eyebrow{
-  font-family:var(--f-caps);letter-spacing:.42em;text-transform:uppercase;
-  font-size:clamp(.58rem,2.4vw,.7rem);color:var(--ink-soft);margin:10px 0 18px;margin-left:.42em;
+  font-family:var(--f-body);font-style:italic;font-size:clamp(.95rem,3.4vw,1.08rem);
+  color:var(--ink-soft);margin:18px 0 10px;letter-spacing:.04em;
 }
 .hero-names{
-  font-family:var(--f-script);font-size:clamp(2.7rem,13vw,5.4rem);line-height:1.02;
-  background:var(--gold-foil);-webkit-background-clip:text;background-clip:text;color:transparent;
+  font-family:var(--f-script);
+  font-size:clamp(2.2rem,9.5vw,4.4rem);
+  line-height:1.34;                 /* room for the tall D / long S swashes */
+  margin:0;
+  padding:.08em .24em;              /* stops the first & last glyph clipping */
+  overflow:visible;
+  color:var(--gold-solid);          /* flat gold — no foil/lighting effect */
 }
 .hero-names .amp{
   display:block;font-family:var(--f-body);font-style:italic;letter-spacing:.24em;
-  font-size:clamp(1rem,4.4vw,1.5rem);color:var(--maroon-soft);
-  -webkit-text-fill-color:var(--maroon-soft);margin:4px 0;
+  font-size:clamp(1rem,4vw,1.4rem);color:var(--maroon-soft);
+  margin:6px 0;line-height:1.2;
 }
-.hero-names-ta{
-  font-family:var(--f-tamil);font-size:clamp(.92rem,3.8vw,1.18rem);color:var(--maroon);
-  margin-top:14px;line-height:1.9;
-}
+.hero-names-ta{font-size:clamp(.86rem,3.4vw,1.02rem);margin-top:14px;line-height:1.9;}
 .hero-date{
-  margin-top:22px;display:inline-flex;flex-direction:column;align-items:center;gap:4px;
-  padding:14px 30px;border-top:1px solid rgba(179,135,40,.45);border-bottom:1px solid rgba(179,135,40,.45);
+  margin-top:24px;display:inline-flex;flex-direction:column;align-items:center;gap:5px;
+  padding:14px 32px;border-top:1px solid rgba(179,135,40,.45);border-bottom:1px solid rgba(179,135,40,.45);
 }
-.hero-date b{font-family:var(--f-caps);font-weight:500;letter-spacing:.2em;font-size:clamp(.78rem,3.2vw,.96rem);color:var(--maroon);}
-.hero-date small{font-family:var(--f-body);font-style:italic;font-size:.9rem;color:var(--ink-soft);letter-spacing:.06em;}
+.hero-date b{font-family:var(--f-caps);font-weight:600;letter-spacing:.18em;font-size:clamp(.78rem,3.1vw,.96rem);color:var(--maroon);}
+.hero-date small{font-family:var(--f-display);font-size:.96rem;color:var(--ink-soft);letter-spacing:.04em;}
+.hero-date .ta{font-size:.8rem;}
 
 /* ---- cards ---- */
 .card{
@@ -241,12 +250,12 @@ a{color:inherit;}
   background:linear-gradient(160deg,#fffdf8 0%,var(--cream-2) 100%);
   border:1px solid rgba(179,135,40,.4);
   border-radius:var(--card-radius);
-  padding:clamp(26px,6.4vw,42px) clamp(20px,5.6vw,38px);
+  padding:clamp(26px,6.4vw,44px) clamp(20px,5.6vw,40px);
   margin:clamp(20px,5vw,30px) 0;
   box-shadow:var(--shadow-soft);
   text-align:center;
   opacity:0;transform:translateY(34px);
-  transition:opacity .85s ease, transform .85s cubic-bezier(.22,1,.36,1);
+  transition:opacity .85s ease, transform .85s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
 }
 .card.in{opacity:1;transform:none;}
 .card::before{
@@ -265,182 +274,180 @@ a{color:inherit;}
 .corner.bl{bottom:11px;left:11px;transform:scaleY(-1);}
 .corner.br{bottom:11px;right:11px;transform:scale(-1);}
 
-.card-ta{
-  font-family:var(--f-tamil);font-weight:500;letter-spacing:.1em;
-  font-size:clamp(1rem,4.2vw,1.24rem);color:var(--maroon);
+/* heading pair: ENGLISH bold on top, Tamil faint beneath */
+.k-en{
+  font-family:var(--f-caps);font-weight:700;
+  font-size:clamp(1.02rem,4.2vw,1.38rem);
+  letter-spacing:.05em;color:var(--maroon);margin:0;line-height:1.3;
 }
-.card.dark .card-ta{color:var(--gold-pale);}
-.card-en{
-  font-family:var(--f-caps);letter-spacing:.34em;text-transform:uppercase;
-  font-size:clamp(.58rem,2.5vw,.72rem);color:var(--ink-soft);
-  margin:8px 0 0;margin-left:.34em;
-}
-.card.dark .card-en{color:rgba(240,223,174,.75);}
-.divider{
-  display:flex;align-items:center;justify-content:center;gap:9px;margin:16px auto 22px;max-width:200px;
-}
+.dark .k-en{color:var(--cream);}
+.k-ta{font-size:clamp(.8rem,3.1vw,.95rem);margin:8px 0 0;line-height:1.6;}
+
+.divider{display:flex;align-items:center;justify-content:center;gap:9px;margin:18px auto 24px;max-width:210px;}
 .divider span{height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(179,135,40,.75),transparent);}
 .divider i{font-style:normal;color:var(--gold);font-size:.7rem;letter-spacing:.2em;}
-.card.dark .divider span{background:linear-gradient(90deg,transparent,rgba(227,196,114,.8),transparent);}
-.card.dark .divider i{color:var(--gold-light);}
+.dark .divider span{background:linear-gradient(90deg,transparent,rgba(227,196,114,.8),transparent);}
+.dark .divider i{color:var(--gold-light);}
 
 /* ---- countdown ---- */
-.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(7px,2.2vw,14px);margin-top:4px;}
+.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(7px,2.2vw,16px);}
 .cd-cell{
   border:1px solid rgba(227,196,114,.4);border-radius:12px;
-  background:rgba(253,247,236,.08);
-  padding:clamp(12px,3.4vw,18px) 4px;
+  background:rgba(253,247,236,.08);padding:clamp(12px,3.4vw,20px) 4px;
 }
 .cd-num{
-  font-family:var(--f-display);font-size:clamp(1.5rem,7.4vw,2.5rem);line-height:1;
+  font-family:var(--f-display);font-size:clamp(1.5rem,7vw,2.6rem);line-height:1;
   color:var(--gold-pale);font-variant-numeric:tabular-nums;
 }
-.cd-lab{
-  display:block;margin-top:7px;font-family:var(--f-tamil);
-  font-size:clamp(.56rem,2.3vw,.72rem);color:rgba(253,247,236,.72);letter-spacing:.04em;
+.cd-lab b{
+  display:block;margin-top:9px;font-family:var(--f-caps);font-weight:600;
+  font-size:clamp(.54rem,2.1vw,.66rem);letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(253,247,236,.92);
 }
-.cd-lab em{display:block;font-family:var(--f-caps);font-style:normal;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;opacity:.62;margin-top:2px;}
-.cd-msg{margin-top:18px;font-family:var(--f-body);font-style:italic;font-size:1rem;color:rgba(253,247,236,.8);}
+.cd-lab em{display:block;font-family:var(--f-tamil);font-style:normal;font-size:clamp(.54rem,2.1vw,.66rem);color:var(--ta-faint-dark);margin-top:3px;}
+.cd-msg{margin:20px 0 0;font-family:var(--f-body);font-style:italic;font-size:1.02rem;color:rgba(253,247,236,.8);}
+.cd-msg-ta{font-size:.82rem;margin-top:5px;}
 
 /* ---- blessings ---- */
-.parents{display:grid;gap:clamp(18px,4.5vw,28px);}
-@media(min-width:600px){.parents{grid-template-columns:1fr auto 1fr;align-items:center;}}
-.parent-block .who{
-  font-family:var(--f-script);font-size:clamp(1.7rem,7vw,2.2rem);color:var(--maroon);line-height:1.1;
-}
-.parent-block .who-ta{font-family:var(--f-tamil);font-size:.92rem;color:var(--maroon-soft);margin-top:2px;}
+.parents{display:grid;gap:clamp(20px,4.5vw,30px);}
+@media(min-width:600px){.parents{grid-template-columns:1fr auto 1fr;align-items:start;}}
+.parent-block .who{font-family:var(--f-script);font-size:clamp(1.7rem,6.6vw,2.3rem);color:var(--maroon);line-height:1.1;}
+.parent-block .who-ta{font-size:.86rem;margin-top:2px;}
 .parent-block .rel{
-  font-family:var(--f-caps);font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;
-  color:var(--ink-soft);margin:12px 0 6px;
+  font-family:var(--f-caps);font-weight:600;font-size:.58rem;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--ink-soft);margin:14px 0 7px;
 }
-.parent-block .names{font-size:clamp(1rem,4vw,1.12rem);color:var(--ink);line-height:1.65;}
-.parent-block .names-ta{font-family:var(--f-tamil);font-size:.84rem;color:var(--ink-soft);margin-top:4px;}
-.ph{
-  background:rgba(179,135,40,.14);border-bottom:1px dashed rgba(179,135,40,.7);
-  padding:0 5px;border-radius:3px;
+.parent-block .names{
+  font-family:var(--f-display);font-size:clamp(1rem,3.8vw,1.14rem);
+  color:var(--ink);line-height:1.7;margin:0;
 }
-.knot{display:grid;place-items:center;}
+.parent-block .names-ta{font-size:.8rem;margin-top:6px;line-height:1.7;}
+.ph{background:rgba(179,135,40,.14);border-bottom:1px dashed rgba(179,135,40,.7);padding:0 5px;border-radius:3px;}
+.knot{display:grid;place-items:center;padding-top:6px;}
 .knot svg{width:46px;height:46px;opacity:.75;}
 
 /* ---- events ---- */
+.events{display:block;}
 .event-no{
-  display:inline-block;font-family:var(--f-caps);font-size:.58rem;letter-spacing:.3em;
-  text-transform:uppercase;color:var(--gold);border:1px solid rgba(179,135,40,.5);
-  border-radius:999px;padding:5px 15px;margin-bottom:14px;
+  display:inline-block;font-family:var(--f-caps);font-weight:600;font-size:.56rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
+  border:1px solid rgba(179,135,40,.5);border-radius:999px;padding:5px 15px;margin-bottom:16px;
 }
-.event-rows{display:grid;gap:14px;margin-top:4px;}
+.event-rows{display:grid;gap:14px;}
 @media(min-width:560px){.event-rows{grid-template-columns:1fr 1fr;}}
 .erow{
   display:flex;gap:12px;align-items:flex-start;text-align:left;
-  background:rgba(255,255,255,.6);border:1px solid rgba(179,135,40,.26);
-  border-radius:12px;padding:14px 16px;
+  background:rgba(255,255,255,.62);border:1px solid rgba(179,135,40,.26);
+  border-radius:12px;padding:15px 17px;
 }
-.erow svg{width:19px;height:19px;flex:none;margin-top:3px;fill:none;stroke:var(--maroon-soft);stroke-width:1.4;}
-.erow .k{font-family:var(--f-caps);font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);}
-.erow .v{font-family:var(--f-display);font-size:clamp(.96rem,3.8vw,1.1rem);color:var(--maroon);margin-top:3px;line-height:1.35;}
-.erow .v small{display:block;font-family:var(--f-tamil);font-size:.78rem;color:var(--ink-soft);margin-top:2px;}
-.event-note{margin-top:18px;font-style:italic;color:var(--ink-soft);font-size:1rem;}
+.erow svg{width:19px;height:19px;flex:none;margin-top:4px;fill:none;stroke:var(--maroon-soft);stroke-width:1.4;}
+.erow .k{font-family:var(--f-caps);font-weight:600;font-size:.54rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin:0;}
+.erow .v{font-family:var(--f-display);font-size:clamp(.96rem,3.6vw,1.1rem);color:var(--maroon);margin:4px 0 0;line-height:1.35;}
+.erow .ta{display:block;font-size:.76rem;margin-top:3px;}
+.event-note{margin:20px 0 0;font-family:var(--f-body);font-style:italic;font-size:1.02rem;color:var(--ink-soft);}
 
 /* ---- venue ---- */
-.venue-name{font-family:var(--f-display);font-size:clamp(1.3rem,5.6vw,1.7rem);color:var(--maroon);letter-spacing:.02em;}
-.venue-ta{font-family:var(--f-tamil);font-size:.95rem;color:var(--maroon-soft);margin-top:4px;}
-.venue-addr{margin-top:12px;font-size:1.02rem;line-height:1.75;color:var(--ink-soft);}
+.venue-name{font-family:var(--f-caps);font-weight:700;font-size:clamp(1.22rem,5vw,1.6rem);color:var(--maroon);letter-spacing:.02em;margin:0;}
+.venue-ta{font-size:.88rem;margin-top:5px;}
+.venue-addr{margin:16px 0 0;font-family:var(--f-display);font-size:1.02rem;line-height:1.8;color:var(--ink-soft);}
 .btn{
-  display:inline-flex;align-items:center;gap:9px;margin-top:22px;
-  padding:14px 28px;border-radius:999px;text-decoration:none;
+  display:inline-flex;align-items:center;gap:9px;margin-top:24px;
+  padding:14px 30px;border-radius:999px;text-decoration:none;
   background:linear-gradient(135deg,var(--maroon-soft),var(--maroon));
-  color:var(--cream);font-family:var(--f-caps);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--cream);font-family:var(--f-caps);font-weight:600;font-size:.68rem;
+  letter-spacing:.24em;text-transform:uppercase;
   box-shadow:0 12px 26px -14px rgba(107,15,26,.9);
   border:1px solid rgba(227,196,114,.5);
-  transition:transform .25s ease, box-shadow .25s ease;
+  transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
 }
-.btn:hover{transform:translateY(-2px);box-shadow:0 18px 32px -14px rgba(107,15,26,.95);}
 .btn svg{width:15px;height:15px;fill:currentColor;}
-.btn.ghost{
-  background:transparent;color:var(--maroon);border:1px solid rgba(179,135,40,.6);box-shadow:none;
-}
-
-/* ---- gallery ---- */
-.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(8px,2.4vw,14px);margin-top:4px;}
-@media(min-width:620px){.gal{grid-template-columns:repeat(4,1fr);}}
-.gal figure{
-  margin:0;aspect-ratio:3/4;border-radius:12px;overflow:hidden;position:relative;
-  background:linear-gradient(150deg,#f3e6cc,#e6d3ae);
-  border:1px solid rgba(179,135,40,.4);
-  display:grid;place-items:center;
-}
-.gal figure img{width:100%;height:100%;object-fit:cover;}
-.gal .ghint{
-  font-family:var(--f-caps);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(107,15,26,.5);text-align:center;padding:8px;
-}
-.gal .ghint svg{width:22px;height:22px;margin:0 auto 7px;fill:none;stroke:rgba(107,15,26,.45);stroke-width:1.3;}
-
-/* ---- rsvp ---- */
-.rsvp-grid{display:grid;gap:14px;margin-top:4px;}
-@media(min-width:560px){.rsvp-grid{grid-template-columns:1fr 1fr;}}
-.contact{
-  border:1px solid rgba(179,135,40,.3);border-radius:12px;padding:18px;
-  background:rgba(255,255,255,.6);
-}
-.contact .cname{font-family:var(--f-display);font-size:1.08rem;color:var(--maroon);}
-.contact .crel{font-family:var(--f-caps);font-size:.54rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px;}
-.contact a{display:inline-block;margin-top:10px;font-size:1.02rem;color:var(--maroon-soft);text-decoration:none;border-bottom:1px solid rgba(140,28,43,.3);}
+.btn-ta{font-size:.78rem;margin-top:10px;}
 
 /* ---- closing ---- */
-.verse{font-family:var(--f-tamil);font-size:clamp(1rem,4.2vw,1.2rem);line-height:2;color:var(--gold-pale);}
-.verse-en{font-family:var(--f-body);font-style:italic;font-size:1.02rem;color:rgba(253,247,236,.78);margin-top:14px;line-height:1.8;}
-.dress{
-  margin-top:26px;padding-top:22px;border-top:1px solid rgba(227,196,114,.3);
-}
-.dress .k{font-family:var(--f-caps);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(240,223,174,.7);}
-.dress .v{font-family:var(--f-display);font-size:1.08rem;color:var(--cream);margin-top:8px;}
-.swatches{display:flex;gap:9px;justify-content:center;margin-top:14px;}
+.verse-en{font-family:var(--f-display);font-size:clamp(1.02rem,4vw,1.2rem);line-height:1.9;color:var(--cream);margin:0;}
+.verse-ta{font-size:clamp(.84rem,3.2vw,.96rem);line-height:2;margin:14px 0 0;}
+.verse-src{font-family:var(--f-caps);font-weight:600;font-size:.56rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(240,223,174,.6);margin:16px 0 0;}
+.dress{margin-top:28px;padding-top:24px;border-top:1px solid rgba(227,196,114,.3);}
+.dress .k{font-family:var(--f-caps);font-weight:600;font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(240,223,174,.72);margin:0;}
+.dress .v{font-family:var(--f-display);font-size:1.1rem;color:var(--cream);margin:9px 0 0;}
+.dress .ta{font-size:.8rem;margin-top:4px;}
+.swatches{display:flex;gap:9px;justify-content:center;margin-top:16px;}
 .swatches i{width:26px;height:26px;border-radius:50%;border:1px solid rgba(227,196,114,.55);display:block;}
 
 /* ---- footer ---- */
-footer{text-align:center;padding:40px 20px calc(110px + env(safe-area-inset-bottom));}
-footer .f-ta{font-family:var(--f-tamil);color:var(--maroon-soft);font-size:1rem;}
-footer .f-en{font-family:var(--f-caps);font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);margin-top:10px;}
-footer .f-sig{font-family:var(--f-script);font-size:1.7rem;color:var(--gold);margin-top:12px;}
+footer{text-align:center;padding:44px 20px calc(110px + env(safe-area-inset-bottom));}
+footer .f-en{font-family:var(--f-caps);font-weight:600;font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--maroon);margin:0;}
+footer .f-ta{font-size:.88rem;margin:10px 0 0;line-height:1.8;}
+footer .f-sig{font-family:var(--f-script);font-size:1.8rem;color:var(--gold);margin:16px 0 0;}
 
 /* ---- music button ---- */
 #music{
   position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:130;
   width:54px;height:54px;border-radius:50%;border:1px solid rgba(227,196,114,.6);
   background:linear-gradient(145deg,var(--maroon-soft),var(--maroon-deep));
-  color:var(--gold-pale);display:none;place-items:center;cursor:pointer;
+  color:var(--gold-pale);display:grid;place-items:center;cursor:pointer;
   box-shadow:0 12px 28px -12px rgba(0,0,0,.75);
   transition:transform .25s ease, opacity .4s ease;
   -webkit-tap-highlight-color:transparent;
 }
-#music.show{display:grid;}
-#music:hover{transform:scale(1.07);}
 #music svg{width:21px;height:21px;fill:currentColor;}
-#music .ring{
-  position:absolute;inset:-5px;border-radius:50%;
-  border:1px dashed rgba(227,196,114,.45);
-  animation:spin 9s linear infinite;animation-play-state:paused;
-}
+#music .ring{position:absolute;inset:-5px;border-radius:50%;border:1px dashed rgba(227,196,114,.45);animation:spin 9s linear infinite;animation-play-state:paused;}
 #music.playing .ring{animation-play-state:running;}
 #music .ico-pause{display:none;}
 #music.playing .ico-play{display:none;}
 #music.playing .ico-pause{display:block;}
 #music .hint{
   position:absolute;right:62px;top:50%;transform:translateY(-50%);
-  white-space:nowrap;font-family:var(--f-caps);font-size:.52rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--maroon);background:var(--cream);
+  white-space:nowrap;font-family:var(--f-caps);font-weight:600;font-size:.52rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--maroon);background:var(--cream);
   border:1px solid rgba(179,135,40,.5);border-radius:999px;padding:7px 13px;
   box-shadow:var(--shadow-soft);opacity:0;pointer-events:none;transition:opacity .4s ease;
 }
 #music .hint.show{opacity:1;}
 
-/* hidden youtube player — kept on-page (not display:none) so playback is allowed */
 #yt-holder{position:fixed;width:1px;height:1px;left:-9999px;top:0;opacity:.01;pointer-events:none;}
-
-/* petals */
 .petal{position:fixed;top:-8vh;z-index:5;pointer-events:none;opacity:0;}
 
+/* ============================================================
+   LARGER SCREENS  (tablet landscape → laptop → desktop)
+   ============================================================ */
+@media(min-width:860px){
+  .wrap{width:min(900px,88vw);}
+  .hero{padding:clamp(72px,8vw,118px) 0 52px;}
+  .hero-kolam{top:-110px;width:760px;}
+  .card{padding:46px 48px;margin:30px 0;}
+  .corner{width:32px;height:32px;}
+  .divider{margin:20px auto 28px;}
+}
+@media(min-width:1000px){
+  /* the two ceremonies sit side by side on a laptop */
+  .events{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin:30px 0;align-items:stretch;}
+  .events .card{margin:0;height:100%;display:flex;flex-direction:column;justify-content:center;}
+  .events .event-rows{grid-template-columns:1fr;}
+  .cd-grid{gap:18px;}
+  .cd-cell{padding:24px 6px;}
+}
+@media(min-width:1280px){
+  .wrap{width:1040px;}
+  .hero-names{font-size:4.8rem;}
+  .card{padding:52px 56px;}
+}
+/* desktop pointer affordances */
+@media(hover:hover) and (pointer:fine){
+  .card:hover{box-shadow:0 30px 64px -28px rgba(74,10,18,.55);}
+  .card.in:hover{transform:translateY(-5px);}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 20px 34px -14px rgba(107,15,26,.95);filter:brightness(1.07);}
+  .erow{transition:background .3s ease, border-color .3s ease;}
+  .erow:hover{background:#fff;border-color:rgba(179,135,40,.55);}
+  #music:hover{transform:scale(1.08);}
+  #cover:hover .tap{background:rgba(253,247,236,.14);}
+}
+/* short laptop windows: keep the cover from overflowing */
+@media(max-height:760px) and (min-width:860px){
+  .cover-names{font-size:3.4rem;}
+  .env{width:150px;}
+  .cover-kolam{width:68px;}
+}
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
   .card{opacity:1;transform:none;}
@@ -450,30 +457,28 @@ footer .f-sig{font-family:var(--f-script);font-size:1.7rem;color:var(--gold);mar
 
 <body class="locked">
 
+<div id="progress"></div>
+
 <!-- ============================ COVER ============================ -->
 <div id="cover" role="button" tabindex="0" aria-label="Tap to open your invitation">
 
-  <!-- mango-leaf toran (leaves are generated by script below) -->
   <svg class="toran" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true">
     <path id="toranRope" d="M0 6 Q 300 44 600 12 T 1200 6" stroke="#e3c472" stroke-width="2" fill="none" opacity=".8"/>
     <g id="toranLeaves" fill="#2f6b3a" stroke="#19401f" stroke-width="1"></g>
   </svg>
 
   <div class="cover-inner">
-    <!-- kolam -->
     <svg class="cover-kolam" viewBox="0 0 120 120" aria-hidden="true">
       <g fill="none" stroke="#e3c472" stroke-width="1.3" opacity=".9">
         <circle cx="60" cy="60" r="12"/>
-        <g>
-          <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z"/>
-          <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(45 60 60)"/>
-          <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(90 60 60)"/>
-          <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(135 60 60)"/>
-          <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(180 60 60)"/>
-          <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(225 60 60)"/>
-          <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(270 60 60)"/>
-          <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(315 60 60)"/>
-        </g>
+        <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z"/>
+        <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(45 60 60)"/>
+        <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(90 60 60)"/>
+        <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(135 60 60)"/>
+        <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(180 60 60)"/>
+        <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(225 60 60)"/>
+        <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(270 60 60)"/>
+        <path d="M60 48 C 42 42, 42 24, 60 18 C 78 24, 78 42, 60 48 Z" transform="rotate(315 60 60)"/>
       </g>
       <g fill="#e3c472">
         <circle cx="60" cy="8" r="1.6"/><circle cx="112" cy="60" r="1.6"/>
@@ -481,8 +486,8 @@ footer .f-sig{font-family:var(--f-script);font-size:1.7rem;color:var(--gold);mar
       </g>
     </svg>
 
-    <p class="cover-tamil">திருமண அழைப்பிதழ்</p>
-    <p class="cover-eyebrow">Wedding Invitation</p>
+    <p class="cover-title">Wedding Invitation</p>
+    <p class="cover-title-ta">திருமண அழைப்பிதழ்</p>
 
     <div class="rule"><span></span><i>&#10070;</i><span></span></div>
 
@@ -503,15 +508,16 @@ footer .f-sig{font-family:var(--f-script);font-size:1.7rem;color:var(--gold);mar
     </div>
 
     <div class="tap">
-      <svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 013 0V11m0-1.5a1.5 1.5 0 013 0V12m0-1a1.5 1.5 0 013 0v5.5A5.5 5.5 0 0112.5 22h-1a5.5 5.5 0 01-5.5-5.5V13a1.5 1.5 0 013 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 013 0V11m0-1.5a1.5 1.5 0 013 0V12m0-1a1.5 1.5 0 013 0v5.5A5.5 5.5 0 0112.5 22h-1a5.5 5.5 0 01-5.5-5.5V13a1.5 1.5 0 013 0"/></svg>
       Tap to open your invitation
     </div>
-    <p class="cover-note">உங்கள் அழைப்பிதழைத் திறக்க தொடவும் &middot; music will begin</p>
+    <p class="cover-note">Music will begin when you open</p>
+    <p class="cover-note-ta">உங்கள் அழைப்பிதழைத் திறக்க தொடவும்</p>
   </div>
 </div>
 
 <!-- ============================ MUSIC ============================ -->
-<button id="music" class="show" aria-label="Pause or play music" title="Music on / off">
+<button id="music" aria-label="Pause or play music" title="Music on / off">
   <span class="ring"></span>
   <svg class="ico-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
   <svg class="ico-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
@@ -527,27 +533,26 @@ footer .f-sig{font-family:var(--f-script);font-size:1.7rem;color:var(--gold);mar
     <svg class="hero-kolam" viewBox="0 0 200 200" aria-hidden="true">
       <g fill="none" stroke="#b38728" stroke-width="1">
         <circle cx="100" cy="100" r="30"/><circle cx="100" cy="100" r="54"/><circle cx="100" cy="100" r="78"/>
-        <g>
-          <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z"/>
-          <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(30 100 100)"/>
-          <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(60 100 100)"/>
-          <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(90 100 100)"/>
-          <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(120 100 100)"/>
-          <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(150 100 100)"/>
-          <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(180 100 100)"/>
-          <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(210 100 100)"/>
-          <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(240 100 100)"/>
-          <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(270 100 100)"/>
-          <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(300 100 100)"/>
-          <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(330 100 100)"/>
-        </g>
+        <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z"/>
+        <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(30 100 100)"/>
+        <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(60 100 100)"/>
+        <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(90 100 100)"/>
+        <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(120 100 100)"/>
+        <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(150 100 100)"/>
+        <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(180 100 100)"/>
+        <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(210 100 100)"/>
+        <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(240 100 100)"/>
+        <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(270 100 100)"/>
+        <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(300 100 100)"/>
+        <path d="M100 70 C 72 60, 72 26, 100 16 C 128 26, 128 60, 100 70 Z" transform="rotate(330 100 100)"/>
       </g>
     </svg>
 
     <div class="wrap">
-      <p class="om">ॐ &nbsp;&#124;&nbsp; பிள்ளையார் துணை</p>
-      <p class="hero-tamil-title">திருமண அழைப்பிதழ்</p>
-      <p class="hero-eyebrow">Together with our families</p>
+      <p class="om">&#2384;</p>
+      <p class="hero-title">Wedding Invitation</p>
+      <p class="hero-title-ta ta">திருமண அழைப்பிதழ் &middot; பிள்ளையார் துணை</p>
+      <p class="hero-eyebrow">Together with our families, we invite you</p>
 
       <h1 class="hero-names">
         Dakshayini Suresh
@@ -555,11 +560,12 @@ footer .f-sig{font-family:var(--f-script);font-size:1.7rem;color:var(--gold);mar
         Ashwin Sureshkumar
       </h1>
 
-      <p class="hero-names-ta">தாக்‌ஷாயினி சுரேஷ் &nbsp;&#8226;&nbsp; அஷ்வின் சுரேஷ்குமார்</p>
+      <p class="hero-names-ta ta">தாக்‌ஷாயினி சுரேஷ் &nbsp;&#8226;&nbsp; அஷ்வின் சுரேஷ்குமார்</p>
 
       <div class="hero-date">
         <b>15 &amp; 16 November 2026</b>
         <small>Suguna Auditorium, Coimbatore</small>
+        <span class="ta">சுகுணா அரங்கம், கோயம்புத்தூர்</span>
       </div>
     </div>
   </header>
@@ -573,17 +579,18 @@ footer .f-sig{font-family:var(--f-script);font-size:1.7rem;color:var(--gold);mar
       <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="#e3c472" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#e3c472" stroke="none"/></svg>
       <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="#e3c472" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#e3c472" stroke="none"/></svg>
 
-      <h2 class="card-ta" id="cd-h">திருமண நாள் வரை</h2>
-      <p class="card-en">Counting down to the celebration</p>
+      <h2 class="k-en" id="cd-h">Counting Down to the Celebration</h2>
+      <p class="k-ta ta">திருமண நாள் வரை</p>
       <div class="divider"><span></span><i>&#10070;</i><span></span></div>
 
       <div class="cd-grid" id="cd">
-        <div class="cd-cell"><div class="cd-num" id="cd-d">00</div><span class="cd-lab">நாட்கள்<em>Days</em></span></div>
-        <div class="cd-cell"><div class="cd-num" id="cd-h2">00</div><span class="cd-lab">மணி<em>Hours</em></span></div>
-        <div class="cd-cell"><div class="cd-num" id="cd-m">00</div><span class="cd-lab">நிமிடம்<em>Minutes</em></span></div>
-        <div class="cd-cell"><div class="cd-num" id="cd-s">00</div><span class="cd-lab">வினாடி<em>Seconds</em></span></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-d">00</div><span class="cd-lab"><b>Days</b><em>நாட்கள்</em></span></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-h2">00</div><span class="cd-lab"><b>Hours</b><em>மணி</em></span></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-m">00</div><span class="cd-lab"><b>Minutes</b><em>நிமிடம்</em></span></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-s">00</div><span class="cd-lab"><b>Seconds</b><em>வினாடி</em></span></div>
       </div>
       <p class="cd-msg" id="cd-msg">until the celebrations begin</p>
+      <p class="cd-msg-ta ta" id="cd-msg-ta">கொண்டாட்டம் தொடங்க</p>
     </section>
 
     <!-- BLESSINGS / PARENTS -->
@@ -593,17 +600,17 @@ footer .f-sig{font-family:var(--f-script);font-size:1.7rem;color:var(--gold);mar
       <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
       <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
 
-      <h2 class="card-ta" id="bl-h">பெரியோர்களின் ஆசியுடன்</h2>
-      <p class="card-en">With the blessings of our elders</p>
+      <h2 class="k-en" id="bl-h">With the Blessings of Our Elders</h2>
+      <p class="k-ta ta">பெரியோர்களின் ஆசியுடன்</p>
       <div class="divider"><span></span><i>&#10070;</i><span></span></div>
 
       <div class="parents">
         <div class="parent-block">
           <div class="who">Dakshayini</div>
-          <div class="who-ta">தாக்‌ஷாயினி சுரேஷ்</div>
+          <div class="who-ta ta">தாக்‌ஷாயினி சுரேஷ்</div>
           <p class="rel">Daughter of</p>
-          <p class="names">Mr. <span class="ph">[Father&rsquo;s Name]</span><br>&amp; Mrs. <span class="ph">[Mother&rsquo;s Name]</span></p>
-          <p class="names-ta">திரு. &amp; திருமதி. <span class="ph">[பெயர்]</span> அவர்களின் மகள்</p>
+          <p class="names">Mr. Suresh Damodharan<br>&amp; Mrs. Vidhyapriya Suresh</p>
+          <p class="names-ta ta">திரு. சுரேஷ் தாமோதரன் &amp;<br>திருமதி. வித்யாப்ரியா சுரேஷ் அவர்களின் மகள்</p>
         </div>
 
         <div class="knot" aria-hidden="true">
@@ -617,63 +624,68 @@ footer .f-sig{font-family:var(--f-script);font-size:1.7rem;color:var(--gold);mar
 
         <div class="parent-block">
           <div class="who">Ashwin</div>
-          <div class="who-ta">அஷ்வின் சுரேஷ்குமார்</div>
+          <div class="who-ta ta">அஷ்வின் சுரேஷ்குமார்</div>
           <p class="rel">Son of</p>
           <p class="names">Mr. <span class="ph">[Father&rsquo;s Name]</span><br>&amp; Mrs. <span class="ph">[Mother&rsquo;s Name]</span></p>
-          <p class="names-ta">திரு. &amp; திருமதி. <span class="ph">[பெயர்]</span> அவர்களின் மகன்</p>
+          <p class="names-ta ta">திரு. &amp; திருமதி. <span class="ph">[பெயர்]</span><br>அவர்களின் மகன்</p>
         </div>
       </div>
     </section>
 
-    <!-- EVENT 1 -->
-    <section class="card" aria-labelledby="e1-h">
-      <svg class="corner tl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-      <svg class="corner tr" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-      <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-      <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
+    <!-- EVENTS -->
+    <div class="events">
 
-      <span class="event-no">Event One</span>
-      <h2 class="card-ta" id="e1-h">நலங்கு மற்றும் வரவேற்பு விழா</h2>
-      <p class="card-en">Nalungu &amp; Reception</p>
-      <div class="divider"><span></span><i>&#10070;</i><span></span></div>
+      <!-- EVENT 1 -->
+      <section class="card" aria-labelledby="e1-h">
+        <svg class="corner tl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
+        <svg class="corner tr" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
+        <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
+        <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
 
-      <div class="event-rows">
-        <div class="erow">
-          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
-          <div><p class="k">Date</p><p class="v">Saturday, 15 November 2026<small>சனிக்கிழமை &middot; 15 நவம்பர்</small></p></div>
+        <span class="event-no">Event One</span>
+        <h2 class="k-en" id="e1-h">Nalungu &amp; Reception</h2>
+        <p class="k-ta ta">நலங்கு மற்றும் வரவேற்பு விழா</p>
+        <div class="divider"><span></span><i>&#10070;</i><span></span></div>
+
+        <div class="event-rows">
+          <div class="erow">
+            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            <div><p class="k">Date</p><p class="v">Saturday, 15 November 2026<span class="ta">சனிக்கிழமை &middot; 15 நவம்பர்</span></p></div>
+          </div>
+          <div class="erow">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+            <div><p class="k">Time</p><p class="v">6:00 PM onwards<span class="ta">மாலை 6 மணி முதல்</span></p></div>
+          </div>
         </div>
-        <div class="erow">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
-          <div><p class="k">Time</p><p class="v">6:00 PM onwards<small>மாலை 6 மணி முதல்</small></p></div>
-        </div>
-      </div>
-      <p class="event-note">Join us for an evening of music, laughter and the traditional nalungu ceremony, followed by dinner.</p>
-    </section>
+        <p class="event-note">An evening of music, laughter and the traditional nalungu ceremony, followed by dinner.</p>
+      </section>
 
-    <!-- EVENT 2 -->
-    <section class="card" aria-labelledby="e2-h">
-      <svg class="corner tl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-      <svg class="corner tr" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-      <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-      <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
+      <!-- EVENT 2 -->
+      <section class="card" aria-labelledby="e2-h">
+        <svg class="corner tl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
+        <svg class="corner tr" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
+        <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
+        <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
 
-      <span class="event-no">Event Two</span>
-      <h2 class="card-ta" id="e2-h">திருமண விழா &middot; முகூர்த்தம்</h2>
-      <p class="card-en">Muhurtam &mdash; The Wedding Ceremony</p>
-      <div class="divider"><span></span><i>&#10070;</i><span></span></div>
+        <span class="event-no">Event Two</span>
+        <h2 class="k-en" id="e2-h">Muhurtam &mdash; The Wedding Ceremony</h2>
+        <p class="k-ta ta">திருமண விழா &middot; முகூர்த்தம்</p>
+        <div class="divider"><span></span><i>&#10070;</i><span></span></div>
 
-      <div class="event-rows">
-        <div class="erow">
-          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
-          <div><p class="k">Date</p><p class="v">Sunday, 16 November 2026<small>ஞாயிற்றுக்கிழமை &middot; 16 நவம்பர்</small></p></div>
+        <div class="event-rows">
+          <div class="erow">
+            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            <div><p class="k">Date</p><p class="v">Sunday, 16 November 2026<span class="ta">ஞாயிற்றுக்கிழமை &middot; 16 நவம்பர்</span></p></div>
+          </div>
+          <div class="erow">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+            <div><p class="k">Muhurtam</p><p class="v">9:00 AM &ndash; 10:30 AM<span class="ta">காலை 9 முதல் 10.30 வரை</span></p></div>
+          </div>
         </div>
-        <div class="erow">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
-          <div><p class="k">Muhurtam</p><p class="v">9:00 AM &ndash; 10:30 AM<small>காலை 9 முதல் 10.30 வரை</small></p></div>
-        </div>
-      </div>
-      <p class="event-note">Your presence at the muhurtam, followed by lunch, will be our greatest blessing.</p>
-    </section>
+        <p class="event-note">Your presence at the muhurtam, followed by lunch, will be our greatest blessing.</p>
+      </section>
+
+    </div>
 
     <!-- VENUE -->
     <section class="card" aria-labelledby="v-h">
@@ -682,12 +694,12 @@ footer .f-sig{font-family:var(--f-script);font-size:1.7rem;color:var(--gold);mar
       <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
       <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
 
-      <h2 class="card-ta" id="v-h">திருமண மண்டபம்</h2>
-      <p class="card-en">The Venue</p>
+      <h2 class="k-en" id="v-h">The Venue</h2>
+      <p class="k-ta ta">திருமண மண்டபம்</p>
       <div class="divider"><span></span><i>&#10070;</i><span></span></div>
 
       <p class="venue-name">Suguna Auditorium</p>
-      <p class="venue-ta">சுகுணா அரங்கம், கோயம்புத்தூர்</p>
+      <p class="venue-ta ta">சுகுணா அரங்கம், கோயம்புத்தூர்</p>
       <p class="venue-addr">
         Kalapatti Main Road, Nehru Nagar West,<br>
         Coimbatore, Tamil Nadu 641014, India
@@ -697,60 +709,7 @@ footer .f-sig{font-family:var(--f-script);font-size:1.7rem;color:var(--gold);mar
         <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
         Get Directions
       </a>
-      <p class="card-en" style="margin-top:12px;">வழி காட்டி</p>
-    </section>
-
-    <!-- GALLERY -->
-    <section class="card" aria-labelledby="g-h">
-      <svg class="corner tl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-      <svg class="corner tr" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-      <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-      <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-
-      <h2 class="card-ta" id="g-h">நினைவுகள்</h2>
-      <p class="card-en">Moments</p>
-      <div class="divider"><span></span><i>&#10070;</i><span></span></div>
-
-      <!-- Replace each .ghint block with:  <img src="images/photo1.jpg" alt=""> -->
-      <div class="gal">
-        <figure><div class="ghint"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2.5"/><circle cx="12" cy="13" r="3.6"/><path d="M8.5 6l1.4-2.2h4.2L15.5 6"/></svg>Photo 1</div></figure>
-        <figure><div class="ghint"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2.5"/><circle cx="12" cy="13" r="3.6"/><path d="M8.5 6l1.4-2.2h4.2L15.5 6"/></svg>Photo 2</div></figure>
-        <figure><div class="ghint"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2.5"/><circle cx="12" cy="13" r="3.6"/><path d="M8.5 6l1.4-2.2h4.2L15.5 6"/></svg>Photo 3</div></figure>
-        <figure><div class="ghint"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2.5"/><circle cx="12" cy="13" r="3.6"/><path d="M8.5 6l1.4-2.2h4.2L15.5 6"/></svg>Photo 4</div></figure>
-      </div>
-    </section>
-
-    <!-- RSVP -->
-    <section class="card" aria-labelledby="r-h">
-      <svg class="corner tl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-      <svg class="corner tr" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-      <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-      <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="#b38728" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#b38728" stroke="none"/></svg>
-
-      <h2 class="card-ta" id="r-h">தொடர்புக்கு</h2>
-      <p class="card-en">RSVP &amp; Contact</p>
-      <div class="divider"><span></span><i>&#10070;</i><span></span></div>
-
-      <div class="rsvp-grid">
-        <div class="contact">
-          <p class="cname"><span class="ph">[Name]</span></p>
-          <p class="crel">Bride&rsquo;s Family</p>
-          <a href="tel:+919000000000">+91 90000 00000</a>
-        </div>
-        <div class="contact">
-          <p class="cname"><span class="ph">[Name]</span></p>
-          <p class="crel">Groom&rsquo;s Family</p>
-          <a href="tel:+919000000001">+91 90000 00001</a>
-        </div>
-      </div>
-
-      <a class="btn ghost"
-         href="https://wa.me/919000000000?text=We%20will%20be%20there%20for%20Dakshayini%20%26%20Ashwin%27s%20wedding!"
-         target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20zm4.4-5.8c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5 0a6.6 6.6 0 01-3.2-2.8c-.2-.4.2-.4.6-1.2a.5.5 0 000-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5a1 1 0 00-.7.3A2.9 2.9 0 006 8.4a5 5 0 001.1 2.7 11.4 11.4 0 004.3 3.8c1.6.6 2.2.7 3 .6a2.6 2.6 0 001.7-1.2 2.1 2.1 0 00.2-1.2c-.1-.1-.3-.2-.5-.3z"/></svg>
-        Confirm on WhatsApp
-      </a>
-      <p class="event-note">Kindly let us know by <strong>1 November</strong> so we can welcome you well.</p>
+      <p class="btn-ta ta">வழி காட்டி</p>
     </section>
 
     <!-- CLOSING / BLESSING + DRESS CODE -->
@@ -760,22 +719,24 @@ footer .f-sig{font-family:var(--f-script);font-size:1.7rem;color:var(--gold);mar
       <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="#e3c472" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#e3c472" stroke="none"/></svg>
       <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="#e3c472" stroke-width="1.4"><path d="M39 1H10C5 1 1 5 1 10v29"/><path d="M33 7H14c-4 0-7 3-7 7v19" opacity=".55"/><circle cx="7" cy="7" r="2.2" fill="#e3c472" stroke="none"/></svg>
 
-      <h2 class="card-ta" id="c-h">வாழ்க வளமுடன்</h2>
-      <p class="card-en">Our Wedding Wishes</p>
+      <h2 class="k-en" id="c-h">Our Wedding Wishes</h2>
+      <p class="k-ta ta">வாழ்க வளமுடன்</p>
       <div class="divider"><span></span><i>&#10070;</i><span></span></div>
 
-      <p class="verse">
+      <p class="verse-en">
+        &ldquo;If a home is filled with love and virtue,<br>
+        that is both its beauty and its purpose.&rdquo;
+      </p>
+      <p class="verse-ta ta">
         &ldquo;அன்பும் அறனும் உடைத்தாயின் இல்வாழ்க்கை<br>
         பண்பும் பயனும் அது.&rdquo;
       </p>
-      <p class="verse-en">
-        &ldquo;If a home is filled with love and virtue,<br>that is both its beauty and its purpose.&rdquo;<br>
-        &mdash; Thirukkural 45
-      </p>
+      <p class="verse-src">Thirukkural 45</p>
 
       <div class="dress">
         <p class="k">Dress Code</p>
         <p class="v">Traditional South Indian attire</p>
+        <p class="ta">பாரம்பரிய உடை அணிந்து வருமாறு அன்புடன் கேட்டுக்கொள்கிறோம்</p>
         <div class="swatches" aria-hidden="true">
           <i style="background:#6b0f1a"></i>
           <i style="background:#d4a017"></i>
@@ -783,15 +744,14 @@ footer .f-sig{font-family:var(--f-script);font-size:1.7rem;color:var(--gold);mar
           <i style="background:#e8c9a0"></i>
           <i style="background:#8d3b72"></i>
         </div>
-        <p class="card-en" style="margin-top:14px;">Silks, golds and festive colours most welcome</p>
       </div>
     </section>
 
   </div>
 
   <footer>
-    <p class="f-ta">தங்கள் வருகை தந்து சிறப்பிக்குமாறு அன்புடன் அழைக்கிறோம்</p>
     <p class="f-en">We joyfully await your presence</p>
+    <p class="f-ta ta">தங்கள் வருகை தந்து சிறப்பிக்குமாறு அன்புடன் அழைக்கிறோம்</p>
     <p class="f-sig">Dakshayini &amp; Ashwin</p>
   </footer>
 </main>
@@ -804,7 +764,7 @@ var WEDDING_START = new Date("2026-11-15T18:00:00+05:30"); // Nalungu, 6 PM IST
 var YT_VIDEO_ID   = "xH0wmOCjzZM";                          // music source
 
 /* ============================================================
-   MANGO-LEAF TORAN  (leaves hung along the rope path)
+   MANGO-LEAF TORAN
    ============================================================ */
 (function buildToran(){
   var rope = document.getElementById('toranRope');
@@ -813,12 +773,11 @@ var YT_VIDEO_ID   = "xH0wmOCjzZM";                          // music source
   var total = rope.getTotalLength(), step = 17, NS = "http://www.w3.org/2000/svg";
   for(var L = 6; L < total; L += step){
     var pt = rope.getPointAtLength(L);
-    var big = (L/step) % 2 === 0;
-    var h   = big ? 1 : 0.76;
-    var tilt = ((L/step) % 3 - 1) * 7;
+    var i  = Math.round(L/step);
+    var big = i % 2 === 0;
     var leaf = document.createElementNS(NS,'path');
     leaf.setAttribute('d','M0 0 C -7 16, -5.5 40, 0 52 C 5.5 40, 7 16, 0 0 Z');
-    leaf.setAttribute('transform','translate('+pt.x.toFixed(1)+','+pt.y.toFixed(1)+') rotate('+tilt+') scale(1,'+h+')');
+    leaf.setAttribute('transform','translate('+pt.x.toFixed(1)+','+pt.y.toFixed(1)+') rotate('+((i%3-1)*7)+') scale(1,'+(big?1:0.76)+')');
     leaf.setAttribute('fill', big ? '#2f6b3a' : '#3d7f44');
     g.appendChild(leaf);
   }
@@ -853,9 +812,9 @@ window.onYouTubeIframeAPIReady = function(){
       onStateChange:function(e){
         if(e.data === YT.PlayerState.PLAYING) musicBtn.classList.add('playing');
         if(e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) musicBtn.classList.remove('playing');
-        if(e.data === YT.PlayerState.ENDED) player.playVideo(); // safety loop
+        if(e.data === YT.PlayerState.ENDED) player.playVideo();
       },
-      onError:function(){ showHint("Tap ♪ to play music"); }
+      onError:function(){ showHint("Tap for music"); }
     }
   });
 };
@@ -868,10 +827,9 @@ function startMusic(){
     player.setVolume(45);
     player.playVideo();
     setTimeout(function(){
-      // if the browser still refused, nudge the guest to tap the button
-      if(player.getPlayerState && player.getPlayerState() !== 1) showHint("Tap ♪ for music");
+      if(player.getPlayerState && player.getPlayerState() !== 1) showHint("Tap for music");
     }, 1600);
-  }catch(err){ showHint("Tap ♪ for music"); }
+  }catch(err){ showHint("Tap for music"); }
 }
 
 function showHint(txt){
@@ -893,6 +851,7 @@ musicBtn.addEventListener('click', function(e){
    ============================================================ */
 var cover  = document.getElementById('cover');
 var invite = document.getElementById('invite');
+var bar    = document.getElementById('progress');
 var opened = false;
 
 function openInvite(){
@@ -907,6 +866,7 @@ function openInvite(){
     document.body.classList.remove('locked');
     invite.classList.add('revealed');
     invite.setAttribute('aria-hidden','false');
+    bar.classList.add('on');
     window.scrollTo(0,0);
     revealCards();
     rainPetals(16);
@@ -925,7 +885,8 @@ cover.addEventListener('keydown', function(e){
    ============================================================ */
 var dEl=document.getElementById('cd-d'), hEl=document.getElementById('cd-h2'),
     mEl=document.getElementById('cd-m'), sEl=document.getElementById('cd-s'),
-    msgEl=document.getElementById('cd-msg'), gridEl=document.getElementById('cd');
+    msgEl=document.getElementById('cd-msg'), msgTaEl=document.getElementById('cd-msg-ta'),
+    gridEl=document.getElementById('cd');
 
 function pad(n){ return n < 10 ? '0'+n : ''+n; }
 
@@ -933,7 +894,8 @@ function tick(){
   var diff = WEDDING_START - new Date();
   if(diff <= 0){
     gridEl.style.display = 'none';
-    msgEl.innerHTML = 'The celebrations have begun &mdash; வாழ்த்துக்கள்!';
+    msgEl.textContent    = 'The celebrations have begun';
+    msgTaEl.textContent  = 'கொண்டாட்டம் தொடங்கிவிட்டது — வாழ்த்துக்கள்!';
     clearInterval(timer);
     return;
   }
@@ -947,7 +909,7 @@ tick();
 var timer = setInterval(tick, 1000);
 
 /* ============================================================
-   SCROLL REVEAL
+   SCROLL REVEAL  +  PROGRESS BAR
    ============================================================ */
 var cards = document.querySelectorAll('.card');
 function revealCards(){
@@ -956,12 +918,27 @@ function revealCards(){
     return;
   }
   var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    entries.forEach(function(en, i){
+      if(en.isIntersecting){
+        en.target.style.transitionDelay = (i * 90) + 'ms';
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      }
     });
-  }, {threshold:.14, rootMargin:'0px 0px -40px 0px'});
+  }, {threshold:.12, rootMargin:'0px 0px -60px 0px'});
   cards.forEach(function(c){ io.observe(c); });
 }
+
+var ticking = false;
+window.addEventListener('scroll', function(){
+  if(ticking) return;
+  ticking = true;
+  requestAnimationFrame(function(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+    ticking = false;
+  });
+}, {passive:true});
 
 /* ============================================================
    FALLING PETALS
@@ -980,18 +957,17 @@ function makePetal(delay){
     p.style.width = size+'px'; p.style.height = (size*1.4)+'px';
     p.style.background = PETALS[Math.floor(Math.random()*PETALS.length)];
     p.style.borderRadius = '60% 0 60% 0';
-    p.style.opacity = '0';
     document.body.appendChild(p);
 
     var dur = 7000 + Math.random()*6000;
     var drift = (Math.random()*160 - 80);
     p.animate([
       {transform:'translate(0,0) rotate(0deg)', opacity:0},
-      {opacity:.75, offset:.1},
+      {opacity:.7, offset:.1},
       {transform:'translate('+drift+'px,112vh) rotate('+(360+Math.random()*360)+'deg)', opacity:0}
     ], {duration:dur, easing:'linear'}).onfinish = function(){
       p.remove();
-      makePetal(Math.random()*5000);   // keep a gentle, endless drizzle
+      makePetal(Math.random()*5000);
     };
   }, delay);
 }
